@@ -1,0 +1,1 @@
+gemini load -v /hpc/grid/hgcb/workspace/users/shangzhong/GEMINI/f05_anno_vcf_change_sample_name/norm.vep.vcf.gz  -p /hpc/grid/hgcb/workspace/users/shangzhong/GEMINI/filter_SZ.ped -t VEP --cores 16 /hpc/grid/hgcb/workspace/users/shangzhong/GEMINI/schizo.db --tempdir /hpc/grid/hgcb/workspace/users/shangzhong/GEMINI/tmp

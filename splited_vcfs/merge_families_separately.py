@@ -12,4 +12,6 @@ for vcf in vcfs:
 families = list(set(families))
 # print(families)
 for f in families:
-	os.system('python ~/Code/Pedigree/p02_merge_norm_vcf.py -f {f}'.format(f=f))
+	cmd = 'bsub -n 4  -R \"span[ptile=4]\" -o log.txt -e log.err.txt -q medium \"python /home/lis262/Code/Pedigree/p02_merge_norm_anno_vcf.py -f {fam}\"'.format(fam=f)
+	os.system(cmd)
+	

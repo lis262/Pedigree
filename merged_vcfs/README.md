@@ -1,0 +1,2 @@
+p01_norm_anno.py: this file normalizes merged vcf file using vt and then annotates it using VEP. 
+p02_subset_load.py: this file extract vcf include samples belong to one family and then load it to generate the gemini database.

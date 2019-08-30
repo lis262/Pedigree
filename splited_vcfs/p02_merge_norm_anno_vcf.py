@@ -31,7 +31,7 @@ if not os.path.exists(merge_vcf_path):
 if family == 'all':
 	vcfs = [v for v in glob.glob(vcf_path + '/*.vcf.gz')]
 else:
-	vcfs = [v for v in glob.glob(vcf_path + '/*.vcf.gz') if family in v]
+	vcfs = [v for v in glob.glob(vcf_path + '/*.vcf.gz') if family + '_' in v]
 
 merge_vcf = merge_vcf_path + '/' + family + '.vcf.gz'
 merge_vcf_files(vcfs, merge_vcf)
@@ -59,14 +59,14 @@ normalize(ref, merge_vcf, norm_vcf)
 
 #===================== annotate vcf file =================
 def annotate_VEP(in_vcf, out_vcf, vep_db):
-    cmd = 'vep -i {vcf} \
-	      -o {out} --vcf --compress_output bgzip --cache \
-	      --dir {db} --sift b --polyphen b \
-	      --symbol --numbers --biotype \
-	      --total_length --fields \
-	      Consequence,Codons,Amino_acids,Gene,\
-	      SYMBOL,Feature,EXON,PolyPhen,SIFT,\
-	      Protein_position,BIOTYPE --offline --fork 4'.format(
+    cmd = ('vep -i {vcf} '
+	      '-o {out} --vcf --compress_output bgzip --cache '
+	      '--dir {db} --sift b --polyphen b '
+	      '--symbol --numbers --biotype '
+	      '--total_length --fields '
+	      'Consequence,Codons,Amino_acids,Gene,'
+	      'SYMBOL,Feature,EXON,PolyPhen,SIFT,'
+	      'Protein_position,BIOTYPE --offline --fork 4 --force_overwrite').format(
 	      	vcf=in_vcf, out=out_vcf, db=vep_db)
     os.system(cmd)
     cmd = 'tabix {vcf}'.format(vcf=out_vcf)

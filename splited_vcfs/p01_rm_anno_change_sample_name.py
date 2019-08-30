@@ -10,7 +10,7 @@ import gzip
 
 data_path = '/hpc/grid/hgcb/workspace/projects/P049_Schizophrenia_Sequencing/data'
 gemini_path = '/hpc/grid/hgcb/workspace/users/shangzhong/GEMINI'
-reformat_py = '/home/lis262/Code/Pedigree/m01_reformat.py'
+
 
 # 1. find samples that are sequenced
 fq_path = data_path + '/fastq/MY1610072_R1/fastq_Samples_1-50'
@@ -42,7 +42,7 @@ raw_vcf_path = data_path + '/vcf'
 raw_vcf_files = glob.glob(raw_vcf_path + '/15*.vcf.gz')
 
 
-gemini_vcf_path = gemini_path + '/f01_vcf_1'
+gemini_vcf_path = gemini_path + '/f01_vcf'
 if not os.path.exists(gemini_vcf_path):
 	os.mkdir(gemini_vcf_path)
 
@@ -78,10 +78,3 @@ for vcf in raw_vcf_files:
     sample_id = 'PS-' + os.path.basename(vcf)[:index]
     out = gemini_vcf_path + '/' + sample_id_dict[sample_id] + '.vcf'
     reformat_vcf(vcf, out)
-
-    # submit jobs
-    # cmd = 'bsub -o log.txt -e log.err.txt \"python {reformat} -i {input} -o {output}\"'.format(reformat=reformat_py, input=vcf,output=out)
-    # os.system(cmd)
-
-    
-    
